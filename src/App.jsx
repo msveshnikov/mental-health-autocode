@@ -20,7 +20,7 @@ import { theme } from './theme';
 
 function App() {
     const [activeFeature, setActiveFeature] = useState('home');
-    const { isOpen, onOpen, onClose } = useDisclosure();
+    const { onOpen } = useDisclosure();
 
     const renderFeature = () => {
         switch (activeFeature) {
