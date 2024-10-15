@@ -13,10 +13,10 @@ import { MindfulnessExercises } from './components/MindfulnessExercises';
 import { MoodTracker } from './components/MoodTracker';
 import { JournalingPrompts } from './components/JournalingPrompts';
 import { OnlineTherapy } from './components/OnlineTherapy';
-import { CommunityForums } from './components/CommunityForums';
+import  CommunityForums  from './components/CommunityForums';
 import { Navigation } from './components/Navigation';
 import { Footer } from './components/Footer';
-import { theme } from './theme';
+import theme from './theme';
 
 function App() {
     const [activeFeature, setActiveFeature] = useState('home');
