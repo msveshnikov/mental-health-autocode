@@ -21,21 +21,24 @@ const meditations = [
         id: 1,
         title: 'Mindful Breathing',
         description: 'A 5-minute guided meditation focusing on breath awareness.',
-        imageUrl: 'https://example.com/mindful-breathing.jpg',
+        imageUrl:
+            'https://images.unsplash.com/photo-1506126613408-eca07ce68773?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
         audioUrl: 'https://example.com/mindful-breathing.mp3'
     },
     {
         id: 2,
         title: 'Body Scan Relaxation',
         description: 'A 10-minute guided meditation for full-body relaxation.',
-        imageUrl: 'https://example.com/body-scan.jpg',
+        imageUrl:
+            'https://images.unsplash.com/photo-1474418397713-7ede21d49118?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
         audioUrl: 'https://example.com/body-scan.mp3'
     },
     {
         id: 3,
         title: 'Loving-Kindness Meditation',
         description: 'A 15-minute guided meditation to cultivate compassion.',
-        imageUrl: 'https://example.com/loving-kindness.jpg',
+        imageUrl:
+            'https://images.unsplash.com/photo-1531353826977-0941b4779a1c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
         audioUrl: 'https://example.com/loving-kindness.mp3'
     }
 ];
@@ -49,7 +52,14 @@ const MeditationCard = ({ meditation, onSelect }) => (
         cursor="pointer"
         onClick={() => onSelect(meditation)}
     >
-        <Image src={meditation.imageUrl} alt={meditation.title} mb={4} />
+        <Image
+            src={meditation.imageUrl}
+            alt={meditation.title}
+            mb={4}
+            objectFit="cover"
+            h="200px"
+            w="100%"
+        />
         <Heading as="h3" size="md" mb={2}>
             {meditation.title}
         </Heading>
@@ -74,6 +84,12 @@ const MeditationPlayer = ({ meditation, onClose }) => {
             <Heading as="h2" size="xl">
                 {meditation.title}
             </Heading>
+            <Image
+                src={meditation.imageUrl}
+                alt={meditation.title}
+                boxSize="300px"
+                objectFit="cover"
+            />
             <Text>{meditation.description}</Text>
             <audio ref={audioRef} src={meditation.audioUrl} />
             <Button onClick={() => setIsPlaying(!isPlaying)}>{isPlaying ? 'Pause' : 'Play'}</Button>
