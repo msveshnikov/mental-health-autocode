@@ -1,9 +1,15 @@
-# Mental Health & Wellness Platform
+# Mental Health & Wellness Platform (built by [AutoCode](https://autocode.work) in 20 minutes)
 
 ## Overview
 
+![alt text](image.png)
+
 A comprehensive platform designed to provide accessible and affordable mental health support,
 resources, and tools for individuals, therapists, counselors, and healthcare providers.
+
+# DEMO
+
+https://mental-health-autocode.onrender.com
 
 ## Target Audience
 
