@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import {
     Box,
     VStack,
@@ -11,8 +11,7 @@ import {
     GridItem,
     Stat,
     StatLabel,
-    StatNumber,
-    StatHelpText
+    StatNumber
 } from '@chakra-ui/react';
 import {
     LineChart,

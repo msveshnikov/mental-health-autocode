@@ -1,4 +1,3 @@
-import React from 'react';
 import { Box, Container, Stack, Text, Link, IconButton } from '@chakra-ui/react';
 import { FaTwitter, FaFacebook, FaInstagram, FaLinkedin } from 'react-icons/fa';
 
