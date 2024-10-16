@@ -94,17 +94,35 @@ export const OnlineTherapy = () => {
     useEffect(() => {
         const fetchLocalProviders = async () => {
             if (zipCode.length === 5) {
-                // Simulating API call to fetch local providers
-                const mockProviders = [
-                    { name: 'Local Clinic A', type: 'Depression' },
-                    { name: 'Anxiety Support Center', type: 'Anxiety' },
-                    { name: 'Addiction Recovery Group', type: 'Addiction' }
-                ];
-                setLocalProviders(mockProviders);
+                try {
+                    const response = await fetch(
+                        `https://npiregistry.cms.hhs.gov/api/?version=2.1&address_purpose=LOCATION&city=&state=&postal_code=${zipCode}&country_code=US&limit=100&skip=&pretty=&enumeration_type=&taxonomy_description=`
+                    );
+
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+
+                    const data = await response.json();
+
+                    if (data.result_count > 0) {
+                        const providers = data.results.map((provider) => ({
+                            name: `${provider.basic.first_name} ${provider.basic.last_name}`,
+                            type: provider.taxonomies[0]?.desc || 'Not specified'
+                        }));
+                        setLocalProviders(providers);
+                    } else {
+                        setLocalProviders([]);
+                    }
+                } catch (error) {
+                    console.error('Failed to fetch providers:', error);
+                    setLocalProviders([]);
+                }
             } else {
                 setLocalProviders([]);
             }
         };
+
         fetchLocalProviders();
     }, [zipCode]);
 
