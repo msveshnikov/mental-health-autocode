@@ -1,0 +1,24 @@
+Version 1.0.0 - Initial Release
+
+We're excited to launch the Mental Health & Wellness Platform! This release includes the following features:
+
+- Guided Meditations: Access a variety of calming meditation sessions.
+- Mindfulness Exercises: Practice being present with interactive activities.
+- Mood Tracking: Monitor and analyze your emotional well-being over time.
+- Journaling Prompts: Reflect on your thoughts with guided writing exercises.
+- Online Therapy Sessions: Connect with licensed therapists virtually.
+- Community Forums: Share experiences and find support in moderated spaces.
+
+Additional highlights:
+- Intuitive navigation and soothing design
+- Dark mode for comfortable nighttime use
+- Accessibility features for users with disabilities
+- Responsive design for seamless use across devices
+
+We're committed to continually improving your experience. Future updates will include:
+- AI-powered chatbot for immediate support
+- Personalized content recommendations
+- Integration with wearable devices
+- Virtual reality (VR) guided meditation experiences
+
+Thank you for choosing our Mental Health & Wellness Platform. We're here to support your journey to better mental well-being.
