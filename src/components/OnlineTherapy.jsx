@@ -21,7 +21,10 @@ import {
     Select,
     FormControl,
     FormLabel,
-    useToast
+    useToast,
+    Spinner,
+    Alert,
+    AlertIcon,
 } from '@chakra-ui/react';
 
 const therapists = [
@@ -63,6 +66,8 @@ export const OnlineTherapy = () => {
     const [sessionTime, setSessionTime] = useState('');
     const [localProviders, setLocalProviders] = useState([]);
     const [zipCode, setZipCode] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
     const toast = useToast();
 
     const handleSelectTherapist = (therapist) => {
@@ -94,9 +99,11 @@ export const OnlineTherapy = () => {
     useEffect(() => {
         const fetchLocalProviders = async () => {
             if (zipCode.length === 5) {
+                setIsLoading(true);
+                setError(null);
                 try {
                     const response = await fetch(
-                        `https://corsproxy.io/?https://npiregistry.cms.hhs.gov/api/?version=2.1&address_purpose=LOCATION&city=&state=&postal_code=${zipCode}&country_code=US&limit=100&skip=&pretty=&enumeration_type=&taxonomy_description=`
+                        `https://corsproxy.io/?https://npiregistry.cms.hhs.gov/api/?version=2.1&address_purpose=LOCATION&city=&state=&postal_code=${zipCode}&country_code=US&limit=100&skip=&pretty=&enumeration_type=&taxonomy_description=Mental%20Health`
                     );
 
                     if (!response.ok) {
@@ -109,7 +116,8 @@ export const OnlineTherapy = () => {
                         const providers = data.results
                             .map((provider) => ({
                                 name: `${provider.basic.first_name} ${provider.basic.last_name}`,
-                                type: provider.taxonomies[0]?.desc || 'Not specified'
+                                type: provider.taxonomies[0]?.desc || 'Not specified',
+                                phone: provider.addresses[0]?.telephone_number || 'Not available'
                             }))
                             .filter((provider) => provider.name !== 'undefined undefined');
                         setLocalProviders(providers);
@@ -118,7 +126,10 @@ export const OnlineTherapy = () => {
                     }
                 } catch (error) {
                     console.error('Failed to fetch providers:', error);
+                    setError('Failed to fetch local providers. Please try again.');
                     setLocalProviders([]);
+                } finally {
+                    setIsLoading(false);
                 }
             } else {
                 setLocalProviders([]);
@@ -157,12 +168,19 @@ export const OnlineTherapy = () => {
                     maxLength={5}
                 />
             </FormControl>
+            {isLoading && <Spinner />}
+            {error && (
+                <Alert status="error" mb={4}>
+                    <AlertIcon />
+                    {error}
+                </Alert>
+            )}
             {localProviders.length > 0 && (
                 <VStack align="start" spacing={2} mb={8}>
-                    <Heading size="sm">Local Providers:</Heading>
+                    <Heading size="sm">Local Mental Health Providers:</Heading>
                     {localProviders.map((provider, index) => (
                         <Text key={index}>
-                            {provider.name} - Specializes in {provider.type}
+                            {provider.name} - Specializes in {provider.type} - Phone: {provider.phone}
                         </Text>
                     ))}
                 </VStack>
