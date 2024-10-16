@@ -96,7 +96,7 @@ export const OnlineTherapy = () => {
             if (zipCode.length === 5) {
                 try {
                     const response = await fetch(
-                        `https://npiregistry.cms.hhs.gov/api/?version=2.1&address_purpose=LOCATION&city=&state=&postal_code=${zipCode}&country_code=US&limit=100&skip=&pretty=&enumeration_type=&taxonomy_description=`
+                        `https://corsproxy.io/?https://npiregistry.cms.hhs.gov/api/?version=2.1&address_purpose=LOCATION&city=&state=&postal_code=${zipCode}&country_code=US&limit=100&skip=&pretty=&enumeration_type=&taxonomy_description=`
                     );
 
                     if (!response.ok) {
