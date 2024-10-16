@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
     Box,
     VStack,
@@ -14,7 +14,12 @@ import {
     ModalBody,
     ModalCloseButton,
     useDisclosure,
-    useColorModeValue
+    useColorModeValue,
+    Slider,
+    SliderTrack,
+    SliderFilledTrack,
+    SliderThumb,
+    Flex
 } from '@chakra-ui/react';
 
 const meditations = [
@@ -24,7 +29,7 @@ const meditations = [
         description: 'A 5-minute guided meditation focusing on breath awareness.',
         imageUrl:
             'https://images.unsplash.com/photo-1506126613408-eca07ce68773?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
-        audioUrl: 'https://example.com/mindful-breathing.mp3',
+        audioUrl: '/music1.mp3',
         duration: '5 minutes'
     },
     {
@@ -33,7 +38,7 @@ const meditations = [
         description: 'A 10-minute guided meditation for full-body relaxation.',
         imageUrl:
             'https://images.unsplash.com/photo-1474418397713-7ede21d49118?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
-        audioUrl: 'https://example.com/body-scan.mp3',
+        audioUrl: '/music2.mp3',
         duration: '10 minutes'
     },
     {
@@ -42,7 +47,7 @@ const meditations = [
         description: 'A 15-minute guided meditation to cultivate compassion.',
         imageUrl:
             'https://images.unsplash.com/photo-1531353826977-0941b4779a1c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
-        audioUrl: 'https://example.com/loving-kindness.mp3',
+        audioUrl: '/music3.mp3',
         duration: '15 minutes'
     }
 ];
@@ -81,7 +86,19 @@ const MeditationCard = ({ meditation, onSelect }) => {
 
 const MeditationPlayer = ({ meditation, onClose }) => {
     const [isPlaying, setIsPlaying] = useState(false);
-    const audioRef = React.useRef(null);
+    const [currentTime, setCurrentTime] = useState(0);
+    const [duration, setDuration] = useState(0);
+    const audioRef = useRef(null);
+
+    useEffect(() => {
+        const audio = audioRef.current;
+        audio.addEventListener('loadedmetadata', () => setDuration(audio.duration));
+        audio.addEventListener('timeupdate', () => setCurrentTime(audio.currentTime));
+        return () => {
+            audio.removeEventListener('loadedmetadata', () => setDuration(audio.duration));
+            audio.removeEventListener('timeupdate', () => setCurrentTime(audio.currentTime));
+        };
+    }, []);
 
     useEffect(() => {
         if (isPlaying) {
@@ -90,6 +107,17 @@ const MeditationPlayer = ({ meditation, onClose }) => {
             audioRef.current.pause();
         }
     }, [isPlaying]);
+
+    const handleSliderChange = (value) => {
+        audioRef.current.currentTime = value;
+        setCurrentTime(value);
+    };
+
+    const formatTime = (time) => {
+        const minutes = Math.floor(time / 60);
+        const seconds = Math.floor(time % 60);
+        return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    };
 
     return (
         <VStack spacing={4} align="center">
@@ -106,13 +134,30 @@ const MeditationPlayer = ({ meditation, onClose }) => {
             <Text>{meditation.description}</Text>
             <Text fontWeight="bold">Duration: {meditation.duration}</Text>
             <audio ref={audioRef} src={meditation.audioUrl} />
-            <Button
-                onClick={() => setIsPlaying(!isPlaying)}
-                colorScheme="teal"
-                leftIcon={isPlaying ? <PauseIcon /> : <PlayIcon />}
-            >
-                {isPlaying ? 'Pause' : 'Play'}
-            </Button>
+            <Flex w="100%" align="center">
+                <Button
+                    onClick={() => setIsPlaying(!isPlaying)}
+                    colorScheme="teal"
+                    leftIcon={isPlaying ? <PauseIcon /> : <PlayIcon />}
+                    mr={4}
+                >
+                    {isPlaying ? 'Pause' : 'Play'}
+                </Button>
+                <Text mr={4}>{formatTime(currentTime)}</Text>
+                <Slider
+                    flex="1"
+                    min={0}
+                    max={duration}
+                    value={currentTime}
+                    onChange={handleSliderChange}
+                >
+                    <SliderTrack>
+                        <SliderFilledTrack />
+                    </SliderTrack>
+                    <SliderThumb />
+                </Slider>
+                <Text ml={4}>{formatTime(duration)}</Text>
+            </Flex>
             <Button onClick={onClose} variant="outline">
                 Close
             </Button>

@@ -1,353 +1,395 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mental Health & Wellness Platform</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-color: #6a4c93;
-            --secondary-color: #8ac6d1;
-            --accent-color: #ffa62b;
-            --background-color: #f0f7f4;
-            --text-color: #333;
-        }
-        body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            transition: all 0.3s ease;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 20px 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-        }
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-            display: flex;
-            justify-content: space-around;
-        }
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-        nav ul li a:hover {
-            color: var(--accent-color);
-        }
-        .hero {
-            background-image: url('https://images.unsplash.com/photo-1506126613408-eca07ce68773?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            text-align: center;
-            padding: 150px 0 100px;
-            position: relative;
-        }
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-        }
-        .hero-content {
-            position: relative;
-            z-index: 1;
-        }
-        .hero h1 {
-            font-size: 3.5em;
-            margin-bottom: 20px;
-            animation: fadeInUp 1s ease-out;
-        }
-        .hero p {
-            font-size: 1.2em;
-            margin-bottom: 30px;
-            animation: fadeInUp 1s ease-out 0.5s both;
-        }
-        .features {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            margin: 50px 0;
-        }
-        .feature {
-            flex-basis: calc(33.333% - 20px);
-            background-color: white;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .feature:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-        }
-        .cta {
-            text-align: center;
-            margin: 50px 0;
-            padding: 50px 0;
-            background-color: var(--secondary-color);
-        }
-        .button {
-            display: inline-block;
-            background-color: var(--accent-color);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-        .button:hover {
-            background-color: #e69019;
-            transform: scale(1.05);
-        }
-        footer {
-            background-color: var(--primary-color);
-            color: white;
-            text-align: center;
-            padding: 20px 0;
-        }
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Mental Health & Wellness Platform</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            :root {
+                --primary-color: #6a4c93;
+                --secondary-color: #8ac6d1;
+                --accent-color: #ffa62b;
+                --background-color: #f0f7f4;
+                --text-color: #333;
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+            body {
+                font-family: 'Poppins', sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: var(--background-color);
+                color: var(--text-color);
+                transition: all 0.3s ease;
             }
-        }
-        @media (max-width: 768px) {
-            .feature {
-                flex-basis: 100%;
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 20px;
+            }
+            header {
+                background-color: var(--primary-color);
+                color: white;
+                padding: 10px 0;
+                position: fixed;
+                width: 100%;
+                top: 0;
+                z-index: 1000;
+            }
+            nav ul {
+                list-style-type: none;
+                padding: 0;
+                display: flex;
+                justify-content: space-around;
+            }
+            nav ul li a {
+                color: white;
+                text-decoration: none;
+                font-weight: 600;
+                transition: color 0.3s ease;
+            }
+            nav ul li a:hover {
+                color: var(--accent-color);
+            }
+            .hero {
+                background-image: url('https://images.unsplash.com/photo-1506126613408-eca07ce68773?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80');
+                background-size: cover;
+                background-position: center;
+                color: white;
+                text-align: center;
+                padding: 150px 0 100px;
+                position: relative;
+            }
+            .hero::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.5);
+            }
+            .hero-content {
+                position: relative;
+                z-index: 1;
             }
             .hero h1 {
-                font-size: 2.5em;
+                font-size: 3.5em;
+                margin-bottom: 20px;
+                animation: fadeInUp 1s ease-out;
             }
-        }
-        #dark-mode-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1001;
-            background: var(--accent-color);
-            border: none;
-            color: white;
-            padding: 10px;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        #dark-mode-toggle:hover {
-            background-color: #e69019;
-        }
-        body.dark-mode {
-            --background-color: #2c3e50;
-            --text-color: #ecf0f1;
-        }
-        body.dark-mode .feature {
-            background-color: #34495e;
-            color: #ecf0f1;
-        }
-        .accessibility-menu {
-            position: fixed;
-            left: 20px;
-            bottom: 20px;
-            z-index: 1001;
-        }
-        .accessibility-menu button {
-            background: var(--accent-color);
-            border: none;
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-right: 10px;
-            transition: background-color 0.3s ease;
-        }
-        .accessibility-menu button:hover {
-            background-color: #e69019;
-        }
-        .testimonials {
-            background-color: var(--secondary-color);
-            padding: 50px 0;
-            text-align: center;
-        }
-        .testimonial {
-            max-width: 600px;
-            margin: 0 auto 30px;
-            font-style: italic;
-        }
-        .faq {
-            padding: 50px 0;
-        }
-        .faq-item {
-            margin-bottom: 20px;
-        }
-        .faq-question {
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .faq-answer {
-            display: none;
-            padding: 10px;
-            background-color: #f9f9f9;
-            border-radius: 5px;
-        }
-    </style>
-</head>
-<body>
-    <button id="dark-mode-toggle">🌓</button>
-    <div class="accessibility-menu">
-        <button id="increase-font">A+</button>
-        <button id="decrease-font">A-</button>
-        <button id="high-contrast">High Contrast</button>
-    </div>
-    <header>
-        <div class="container">
-            <nav>
-                <ul>
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#testimonials">Testimonials</a></li>
-                    <li><a href="#faq">FAQ</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
+            .hero p {
+                font-size: 1.2em;
+                margin-bottom: 30px;
+                animation: fadeInUp 1s ease-out 0.5s both;
+            }
+            .features {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                margin: 50px 0;
+            }
+            .feature {
+                flex-basis: calc(33.333% - 20px);
+                background-color: white;
+                border-radius: 8px;
+                padding: 20px;
+                margin-bottom: 20px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                transition:
+                    transform 0.3s ease,
+                    box-shadow 0.3s ease;
+            }
+            .feature:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            }
+            .cta {
+                text-align: center;
+                margin: 50px 0;
+                padding: 50px 0;
+                background-color: var(--secondary-color);
+            }
+            .button {
+                display: inline-block;
+                background-color: var(--accent-color);
+                color: white;
+                padding: 12px 24px;
+                border-radius: 30px;
+                text-decoration: none;
+                font-weight: 600;
+                transition:
+                    background-color 0.3s ease,
+                    transform 0.3s ease;
+            }
+            .button:hover {
+                background-color: #e69019;
+                transform: scale(1.05);
+            }
+            footer {
+                background-color: var(--primary-color);
+                color: white;
+                text-align: center;
+                padding: 20px 0;
+            }
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            @media (max-width: 768px) {
+                .feature {
+                    flex-basis: 100%;
+                }
+                .hero h1 {
+                    font-size: 2.5em;
+                }
+            }
+            #dark-mode-toggle {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                z-index: 1001;
+                background: var(--accent-color);
+                border: none;
+                color: white;
+                padding: 10px;
+                border-radius: 50%;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+            #dark-mode-toggle:hover {
+                background-color: #e69019;
+            }
+            body.dark-mode {
+                --background-color: #2c3e50;
+                --text-color: #ecf0f1;
+            }
+            body.dark-mode .feature {
+                background-color: #34495e;
+                color: #ecf0f1;
+            }
+            .accessibility-menu {
+                position: fixed;
+                left: 20px;
+                bottom: 20px;
+                z-index: 1001;
+            }
+            .accessibility-menu button {
+                background: var(--accent-color);
+                border: none;
+                color: white;
+                padding: 10px;
+                border-radius: 5px;
+                cursor: pointer;
+                margin-right: 10px;
+                transition: background-color 0.3s ease;
+            }
+            .accessibility-menu button:hover {
+                background-color: #e69019;
+            }
+            .testimonials {
+                background-color: var(--secondary-color);
+                padding: 50px 0;
+                text-align: center;
+            }
+            .testimonial {
+                max-width: 600px;
+                margin: 0 auto 30px;
+                font-style: italic;
+            }
+            .faq {
+                padding: 50px 0;
+            }
+            .faq-item {
+                margin-bottom: 20px;
+            }
+            .faq-question {
+                font-weight: bold;
+                cursor: pointer;
+            }
+            .faq-answer {
+                display: none;
+                padding: 10px;
+                background-color: #f9f9f9;
+                border-radius: 5px;
+            }
+            #music-player {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                z-index: 1001;
+            }
+        </style>
+    </head>
+    <body>
+        <button id="dark-mode-toggle">🌓</button>
+        <div class="accessibility-menu">
+            <button id="increase-font">A+</button>
+            <button id="decrease-font">A-</button>
+            <button id="high-contrast">High Contrast</button>
         </div>
-    </header>
-
-    <section class="hero">
-        <div class="container hero-content">
-            <h1>Mental Health & Wellness Platform</h1>
-            <p>Comprehensive support for your mental well-being</p>
-            <a href="https://mental-health-autocode.onrender.com" class="button">Get Started</a>
-        </div>
-    </section>
-
-    <section id="features" class="features container">
-        <div class="feature">
-            <h2>Guided Meditations</h2>
-            <p>Experience peace with our curated meditation sessions.</p>
-        </div>
-        <div class="feature">
-            <h2>Mood Tracking</h2>
-            <p>Monitor and understand your emotional patterns.</p>
-        </div>
-        <div class="feature">
-            <h2>Online Therapy</h2>
-            <p>Connect with licensed therapists from the comfort of your home.</p>
-        </div>
-        <div class="feature">
-            <h2>Community Forums</h2>
-            <p>Share experiences and find support in our community.</p>
-        </div>
-        <div class="feature">
-            <h2>Journaling Prompts</h2>
-            <p>Reflect and grow with guided journaling exercises.</p>
-        </div>
-        <div class="feature">
-            <h2>Mindfulness Exercises</h2>
-            <p>Practice mindfulness to reduce stress and anxiety.</p>
-        </div>
-    </section>
-
-    <section id="about" class="cta">
-        <div class="container">
-            <h2>About Our Platform</h2>
-            <p>We offer a centralized solution for mental health support, bridging the gap between users and mental health resources.</p>
-            <a href="#" class="button">Learn More</a>
-        </div>
-    </section>
-
-    <section id="testimonials" class="testimonials">
-        <div class="container">
-            <h2>What Our Users Say</h2>
-            <div class="testimonial">
-                <p>"This platform has been a game-changer for my mental health journey. The guided meditations and mood tracking features have helped me gain better control over my emotions."</p>
-                <p>- Sarah K.</p>
+        <header>
+            <div class="container">
+                <nav>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
             </div>
-            <div class="testimonial">
-                <p>"As a therapist, I've found the online therapy tools to be incredibly useful for connecting with my clients. The platform is intuitive and secure."</p>
-                <p>- Dr. Michael R.</p>
+        </header>
+
+        <section class="hero">
+            <div class="container hero-content">
+                <h1>Mental Health & Wellness Platform</h1>
+                <p>Comprehensive support for your mental well-being</p>
+                <a href="https://mental-health-autocode.onrender.com" class="button">Get Started</a>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="faq" class="faq container">
-        <h2>Frequently Asked Questions</h2>
-        <div class="faq-item">
-            <div class="faq-question">How secure is my data on this platform?</div>
-            <div class="faq-answer">We take data security very seriously. All data is encrypted and we comply with HIPAA regulations to ensure your information remains confidential.</div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-question">Can I use this platform alongside my existing therapy?</div>
-            <div class="faq-answer">Absolutely! Our platform is designed to complement traditional therapy and provide additional support between sessions.</div>
-        </div>
-    </section>
+        <section id="features" class="features container">
+            <div class="feature">
+                <h2>Guided Meditations</h2>
+                <p>Experience peace with our curated meditation sessions.</p>
+            </div>
+            <div class="feature">
+                <h2>Mood Tracking</h2>
+                <p>Monitor and understand your emotional patterns.</p>
+            </div>
+            <div class="feature">
+                <h2>Online Therapy</h2>
+                <p>Connect with licensed therapists from the comfort of your home.</p>
+            </div>
+            <div class="feature">
+                <h2>Community Forums</h2>
+                <p>Share experiences and find support in our community.</p>
+            </div>
+            <div class="feature">
+                <h2>Journaling Prompts</h2>
+                <p>Reflect and grow with guided journaling exercises.</p>
+            </div>
+            <div class="feature">
+                <h2>Mindfulness Exercises</h2>
+                <p>Practice mindfulness to reduce stress and anxiety.</p>
+            </div>
+        </section>
 
-    <footer id="contact">
-        <div class="container">
-            <p>&copy; 2023 Mental Health & Wellness Platform. All rights reserved.</p>
-            <p>Contact us: support@mentalhealth.com</p>
-        </div>
-    </footer>
+        <section id="about" class="cta">
+            <div class="container">
+                <h2>About Our Platform</h2>
+                <p>
+                    We offer a centralized solution for mental health support, bridging the gap
+                    between users and mental health resources.
+                </p>
+                <a href="#" class="button">Learn More</a>
+            </div>
+        </section>
 
-    <script>
-        document.getElementById('dark-mode-toggle').addEventListener('click', function() {
-            document.body.classList.toggle('dark-mode');
-        });
+        <section id="testimonials" class="testimonials">
+            <div class="container">
+                <h2>What Our Users Say</h2>
+                <div class="testimonial">
+                    <p>
+                        "This platform has been a game-changer for my mental health journey. The
+                        guided meditations and mood tracking features have helped me gain better
+                        control over my emotions."
+                    </p>
+                    <p>- Sarah K.</p>
+                </div>
+                <div class="testimonial">
+                    <p>
+                        "As a therapist, I've found the online therapy tools to be incredibly useful
+                        for connecting with my clients. The platform is intuitive and secure."
+                    </p>
+                    <p>- Dr. Michael R.</p>
+                </div>
+            </div>
+        </section>
 
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
+        <section id="faq" class="faq container">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <div class="faq-question">How secure is my data on this platform?</div>
+                <div class="faq-answer">
+                    We take data security very seriously. All data is encrypted and we comply with
+                    HIPAA regulations to ensure your information remains confidential.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Can I use this platform alongside my existing therapy?
+                </div>
+                <div class="faq-answer">
+                    Absolutely! Our platform is designed to complement traditional therapy and
+                    provide additional support between sessions.
+                </div>
+            </div>
+        </section>
+
+        <footer id="contact">
+            <div class="container">
+                <p>&copy; 2023 Mental Health & Wellness Platform. All rights reserved.</p>
+                <p>Contact us: support@mentalhealth.com</p>
+            </div>
+        </footer>
+
+        <audio id="music-player" controls>
+            <source src="/public/music1.mp3" type="audio/mpeg" />
+            Your browser does not support the audio element.
+        </audio>
+
+        <script>
+            document.getElementById('dark-mode-toggle').addEventListener('click', function () {
+                document.body.classList.toggle('dark-mode');
+            });
+
+            document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
                 });
             });
-        });
 
-        let fontSize = 16;
-        document.getElementById('increase-font').addEventListener('click', function() {
-            fontSize += 2;
-            document.body.style.fontSize = fontSize + 'px';
-        });
-
-        document.getElementById('decrease-font').addEventListener('click', function() {
-            fontSize = Math.max(12, fontSize - 2);
-            document.body.style.fontSize = fontSize + 'px';
-        });
-
-        document.getElementById('high-contrast').addEventListener('click', function() {
-            document.body.classList.toggle('high-contrast');
-        });
-
-        document.querySelectorAll('.faq-question').forEach(question => {
-            question.addEventListener('click', function() {
-                const answer = this.nextElementSibling;
-                answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+            let fontSize = 16;
+            document.getElementById('increase-font').addEventListener('click', function () {
+                fontSize += 2;
+                document.body.style.fontSize = fontSize + 'px';
             });
-        });
-    </script>
-</body>
+
+            document.getElementById('decrease-font').addEventListener('click', function () {
+                fontSize = Math.max(12, fontSize - 2);
+                document.body.style.fontSize = fontSize + 'px';
+            });
+
+            document.getElementById('high-contrast').addEventListener('click', function () {
+                document.body.classList.toggle('high-contrast');
+            });
+
+            document.querySelectorAll('.faq-question').forEach((question) => {
+                question.addEventListener('click', function () {
+                    const answer = this.nextElementSibling;
+                    answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+                });
+            });
+
+            window.addEventListener('load', function () {
+                const musicPlayer = document.getElementById('music-player');
+                musicPlayer.volume = 0.3;
+                musicPlayer.play();
+            });
+        </script>
+    </body>
 </html>
