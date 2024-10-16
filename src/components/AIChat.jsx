@@ -66,7 +66,7 @@ const AIChat = () => {
             const data = await response.json();
             setChatHistory((prev) => [
                 ...prev,
-                { role: 'assistant', content: data.response }
+                { role: 'assistant', content: data.textResponse }
             ]);
         } catch (error) {
             toast({
