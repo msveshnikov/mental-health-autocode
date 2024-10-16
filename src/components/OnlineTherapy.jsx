@@ -106,10 +106,12 @@ export const OnlineTherapy = () => {
                     const data = await response.json();
 
                     if (data.result_count > 0) {
-                        const providers = data.results.map((provider) => ({
-                            name: `${provider.basic.first_name} ${provider.basic.last_name}`,
-                            type: provider.taxonomies[0]?.desc || 'Not specified'
-                        }));
+                        const providers = data.results
+                            .map((provider) => ({
+                                name: `${provider.basic.first_name} ${provider.basic.last_name}`,
+                                type: provider.taxonomies[0]?.desc || 'Not specified'
+                            }))
+                            .filter((provider) => provider.name !== 'undefined undefined');
                         setLocalProviders(providers);
                     } else {
                         setLocalProviders([]);
