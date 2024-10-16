@@ -227,6 +227,44 @@
                 right: 20px;
                 z-index: 1001;
             }
+            .feature-image {
+                width: 100%;
+                height: 200px;
+                object-fit: cover;
+                border-radius: 8px 8px 0 0;
+            }
+            .scroll-indicator {
+                position: fixed;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 40px;
+                height: 40px;
+                background-color: var(--accent-color);
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                z-index: 1000;
+                animation: bounce 2s infinite;
+            }
+            @keyframes bounce {
+                0%, 20%, 50%, 80%, 100% {
+                    transform: translateY(0);
+                }
+                40% {
+                    transform: translateY(-10px);
+                }
+                60% {
+                    transform: translateY(-5px);
+                }
+            }
+            .scroll-indicator::after {
+                content: '↓';
+                color: white;
+                font-size: 24px;
+            }
         </style>
     </head>
     <body>
@@ -260,26 +298,32 @@
 
         <section id="features" class="features container">
             <div class="feature">
+                <img src="https://images.unsplash.com/photo-1602192509154-0b900ee1f851?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Guided Meditations" class="feature-image">
                 <h2>Guided Meditations</h2>
                 <p>Experience peace with our curated meditation sessions.</p>
             </div>
             <div class="feature">
+                <img src="https://images.unsplash.com/photo-1517971071642-34a2d3ecc9cd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Mood Tracking" class="feature-image">
                 <h2>Mood Tracking</h2>
                 <p>Monitor and understand your emotional patterns.</p>
             </div>
             <div class="feature">
+                <img src="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Online Therapy" class="feature-image">
                 <h2>Online Therapy</h2>
                 <p>Connect with licensed therapists from the comfort of your home.</p>
             </div>
             <div class="feature">
+                <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Community Forums" class="feature-image">
                 <h2>Community Forums</h2>
                 <p>Share experiences and find support in our community.</p>
             </div>
             <div class="feature">
+                <img src="https://images.unsplash.com/photo-1517842645767-c639042777db?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Journaling Prompts" class="feature-image">
                 <h2>Journaling Prompts</h2>
                 <p>Reflect and grow with guided journaling exercises.</p>
             </div>
             <div class="feature">
+                <img src="https://images.unsplash.com/photo-1474418397713-7ede21d49118?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1453&q=80" alt="Mindfulness Exercises" class="feature-image">
                 <h2>Mindfulness Exercises</h2>
                 <p>Practice mindfulness to reduce stress and anxiety.</p>
             </div>
@@ -349,6 +393,8 @@
             Your browser does not support the audio element.
         </audio>
 
+        <div class="scroll-indicator"></div>
+
         <script>
             document.getElementById('dark-mode-toggle').addEventListener('click', function () {
                 document.body.classList.toggle('dark-mode');
@@ -389,6 +435,22 @@
                 const musicPlayer = document.getElementById('music-player');
                 musicPlayer.volume = 0.3;
                 musicPlayer.play();
+            });
+
+            const scrollIndicator = document.querySelector('.scroll-indicator');
+            scrollIndicator.addEventListener('click', () => {
+                window.scrollTo({
+                    top: window.innerHeight,
+                    behavior: 'smooth'
+                });
+            });
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > window.innerHeight / 2) {
+                    scrollIndicator.style.display = 'none';
+                } else {
+                    scrollIndicator.style.display = 'flex';
+                }
             });
         </script>
     </body>

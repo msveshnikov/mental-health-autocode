@@ -103,5 +103,5 @@ This project is licensed under the MIT License.
 
 # TODO
 
--   make landing super cool - add more information, transitions, animations and pictures (hardcoded urls from unsplash)
--   play random music (from /public folder) on landing and on meditation page when started
+-   make landing design awsome, nice, extremely catchy! super cool - add more information,
+    transitions, animations and pictures (hardcoded urls from unsplash)
