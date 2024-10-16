@@ -19,13 +19,11 @@ export const Footer = () => {
                     justify="space-between"
                 >
                     <Text fontSize="sm">
-                        © {new Date().getFullYear()} Mental Health & Wellness Platform. All rights
-                        reserved.
+                        © {new Date().getFullYear()} MaxSoft. All rights reserved.
                     </Text>
                     <Stack direction="row" spacing="4">
                         <Link href="/privacy">Privacy Policy</Link>
                         <Link href="/terms">Terms of Service</Link>
-                        <Link href="/contact">Contact Us</Link>
                     </Stack>
                     <Stack direction="row" spacing="4">
                         <IconButton

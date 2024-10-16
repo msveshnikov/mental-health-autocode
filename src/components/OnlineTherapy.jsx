@@ -24,7 +24,7 @@ import {
     useToast,
     Spinner,
     Alert,
-    AlertIcon,
+    AlertIcon
 } from '@chakra-ui/react';
 
 const therapists = [
@@ -180,7 +180,8 @@ export const OnlineTherapy = () => {
                     <Heading size="sm">Local Mental Health Providers:</Heading>
                     {localProviders.map((provider, index) => (
                         <Text key={index}>
-                            {provider.name} - Specializes in {provider.type} - Phone: {provider.phone}
+                            {provider.name} - Specializes in {provider.type} - Phone:{' '}
+                            {provider.phone}
                         </Text>
                     ))}
                 </VStack>

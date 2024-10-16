@@ -25,7 +25,8 @@ const NAV_ITEMS = [
     { label: 'Mood Tracker', key: 'moodTracker' },
     { label: 'Journaling Prompts', key: 'journaling' },
     { label: 'Online Therapy', key: 'therapy' },
-    { label: 'Community Forums', key: 'forums' }
+    { label: 'Community Forums', key: 'forums' },
+    { label: 'AI Chat', key: 'aiChat' }
 ];
 
 export const Navigation = ({ activeFeature, setActiveFeature }) => {

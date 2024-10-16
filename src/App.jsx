@@ -8,6 +8,7 @@ import { OnlineTherapy } from './components/OnlineTherapy';
 import CommunityForums from './components/CommunityForums';
 import { Navigation } from './components/Navigation';
 import { Footer } from './components/Footer';
+import AIChat from './components/AIChat';
 import theme from './theme';
 
 function App() {
@@ -27,6 +28,8 @@ function App() {
                 return <OnlineTherapy />;
             case 'forums':
                 return <CommunityForums />;
+            case 'aiChat':
+                return <AIChat />;
             default:
                 return (
                     <VStack spacing={8} align="center">
