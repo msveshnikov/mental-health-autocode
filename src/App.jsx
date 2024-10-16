@@ -1,14 +1,5 @@
 import { useState } from 'react';
-import {
-    ChakraProvider,
-    Box,
-    VStack,
-    Heading,
-    Text,
-    Button,
-    useDisclosure,
-    Image
-} from '@chakra-ui/react';
+import { ChakraProvider, Box, VStack, Heading, Text, Button, Image } from '@chakra-ui/react';
 import { GuidedMeditations } from './components/GuidedMeditations';
 import { MindfulnessExercises } from './components/MindfulnessExercises';
 import { MoodTracker } from './components/MoodTracker';
@@ -21,7 +12,6 @@ import theme from './theme';
 
 function App() {
     const [activeFeature, setActiveFeature] = useState('home');
-    const { onOpen } = useDisclosure();
 
     const renderFeature = () => {
         switch (activeFeature) {
@@ -55,7 +45,11 @@ function App() {
                             Your comprehensive solution for accessible and affordable mental health
                             support.
                         </Text>
-                        <Button colorScheme="teal" size="lg" onClick={onOpen}>
+                        <Button
+                            colorScheme="teal"
+                            size="lg"
+                            onClick={() => setActiveFeature('meditations')}
+                        >
                             Get Started
                         </Button>
                     </VStack>
