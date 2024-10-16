@@ -2,7 +2,7 @@
 
 ## Overview
 
-![alt text](image.png)
+![alt text](https://images.unsplash.com/photo-1506126613408-eca07ce68773?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80)
 
 A comprehensive platform designed to provide accessible and affordable mental health support,
 resources, and tools for individuals, therapists, counselors, and healthcare providers.
@@ -56,15 +56,11 @@ health resources.
 5. Gamification elements to encourage regular use and engagement
 6. Social sharing features for community support and encouragement
 7. Integration with popular calendar apps for scheduling therapy sessions and reminders
-8. Multi-language support for broader accessibility
 
 ## Security and Privacy
 
--   Implement end-to-end encryption for user data
 -   Comply with HIPAA regulations for handling sensitive health information
 -   Provide clear privacy settings and data management options for users
--   Regular security audits and penetration testing
--   Implement two-factor authentication for user accounts
 
 ## Monetization Strategy
 
@@ -78,11 +74,10 @@ health resources.
 
 1. Mobile app development for iOS and Android
 2. Integration with healthcare provider systems for seamless data sharing
-3. Expansion of language support for global reach
-4. Partnerships with mental health organizations and institutions
-5. Development of a therapist marketplace for easier discovery and booking
-6. Implementation of machine learning for personalized treatment recommendations
-7. Creation of a content management system for therapists to share resources
+3. Partnerships with mental health organizations and institutions
+4. Development of a therapist marketplace for easier discovery and booking
+5. Implementation of machine learning for personalized treatment recommendations
+6. Creation of a content management system for therapists to share resources
 
 ## Component Architecture
 
@@ -90,13 +85,6 @@ health resources.
 -   Utilize React hooks for state management and side effects
 -   Implement lazy loading for improved performance
 -   Use error boundaries for graceful error handling
-
-## Testing Strategy
-
--   Implement unit tests for individual components
--   Conduct integration tests for feature interactions
--   Perform end-to-end testing for critical user flows
--   Implement accessibility testing to ensure WCAG compliance
 
 ## Getting Started
 
@@ -112,3 +100,7 @@ information.
 ## License
 
 This project is licensed under the MIT License.
+
+# TODO
+
+-   put picture to main screen

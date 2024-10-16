@@ -6,7 +6,8 @@ import {
     Heading,
     Text,
     Button,
-    useDisclosure
+    useDisclosure,
+    Image
 } from '@chakra-ui/react';
 import { GuidedMeditations } from './components/GuidedMeditations';
 import { MindfulnessExercises } from './components/MindfulnessExercises';
@@ -39,7 +40,14 @@ function App() {
             default:
                 return (
                     <VStack spacing={8} align="center">
-                        <Heading as="h1" size="2xl">
+                        <Image
+                            src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+                            alt="Mental Health & Wellness"
+                            borderRadius="md"
+                            maxWidth="100%"
+                            height="400px"
+                        />
+                        <Heading as="h1" size="2xl" textAlign="center">
                             Welcome to Mental Health & Wellness Platform
                         </Heading>
                         <Text fontSize="xl" textAlign="center">
