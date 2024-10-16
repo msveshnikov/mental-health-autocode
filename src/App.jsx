@@ -46,6 +46,7 @@ function App() {
                             borderRadius="md"
                             maxWidth="100%"
                             height="400px"
+                            objectFit="cover"
                         />
                         <Heading as="h1" size="2xl" textAlign="center">
                             Welcome to Mental Health & Wellness Platform

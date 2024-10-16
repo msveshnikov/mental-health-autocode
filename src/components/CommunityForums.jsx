@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import {
     Box,
     VStack,
@@ -10,7 +10,10 @@ import {
     List,
     ListItem,
     Divider,
-    useToast
+    useToast,
+    Avatar,
+    HStack,
+    Tag
 } from '@chakra-ui/react';
 
 const CommunityForums = () => {
@@ -18,12 +21,7 @@ const CommunityForums = () => {
     const [newPost, setNewPost] = useState({ title: '', content: '' });
     const toast = useToast();
 
-    useEffect(() => {
-        fetchPosts();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
-    const fetchPosts = async () => {
+    const fetchPosts = useCallback(async () => {
         try {
             const response = await fetch('/api/posts');
             const data = await response.json();
@@ -38,7 +36,11 @@ const CommunityForums = () => {
                 isClosable: true
             });
         }
-    };
+    }, [toast]);
+
+    useEffect(() => {
+        fetchPosts();
+    }, [fetchPosts]);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -125,10 +127,25 @@ const CommunityForums = () => {
                     <List spacing={4}>
                         {posts.map((post) => (
                             <ListItem key={post.id} p={4} borderWidth={1} borderRadius="md">
-                                <Heading as="h4" size="md">
+                                <HStack spacing={4} mb={2}>
+                                    <Avatar size="sm" name={post.author} />
+                                    <Text fontWeight="bold">{post.author}</Text>
+                                    <Text fontSize="sm" color="gray.500">
+                                        {new Date(post.createdAt).toLocaleDateString()}
+                                    </Text>
+                                </HStack>
+                                <Heading as="h4" size="md" mb={2}>
                                     {post.title}
                                 </Heading>
-                                <Text mt={2}>{post.content}</Text>
+                                <Text mb={2}>{post.content}</Text>
+                                <HStack spacing={2}>
+                                    {post.tags &&
+                                        post.tags.map((tag, index) => (
+                                            <Tag key={index} size="sm" colorScheme="teal">
+                                                {tag}
+                                            </Tag>
+                                        ))}
+                                </HStack>
                             </ListItem>
                         ))}
                     </List>

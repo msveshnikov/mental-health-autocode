@@ -13,7 +13,8 @@ import {
     ModalHeader,
     ModalBody,
     ModalCloseButton,
-    useDisclosure
+    useDisclosure,
+    useColorModeValue
 } from '@chakra-ui/react';
 
 const meditations = [
@@ -23,7 +24,8 @@ const meditations = [
         description: 'A 5-minute guided meditation focusing on breath awareness.',
         imageUrl:
             'https://images.unsplash.com/photo-1506126613408-eca07ce68773?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
-        audioUrl: 'https://example.com/mindful-breathing.mp3'
+        audioUrl: 'https://example.com/mindful-breathing.mp3',
+        duration: '5 minutes'
     },
     {
         id: 2,
@@ -31,7 +33,8 @@ const meditations = [
         description: 'A 10-minute guided meditation for full-body relaxation.',
         imageUrl:
             'https://images.unsplash.com/photo-1474418397713-7ede21d49118?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
-        audioUrl: 'https://example.com/body-scan.mp3'
+        audioUrl: 'https://example.com/body-scan.mp3',
+        duration: '10 minutes'
     },
     {
         id: 3,
@@ -39,33 +42,42 @@ const meditations = [
         description: 'A 15-minute guided meditation to cultivate compassion.',
         imageUrl:
             'https://images.unsplash.com/photo-1531353826977-0941b4779a1c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
-        audioUrl: 'https://example.com/loving-kindness.mp3'
+        audioUrl: 'https://example.com/loving-kindness.mp3',
+        duration: '15 minutes'
     }
 ];
 
-const MeditationCard = ({ meditation, onSelect }) => (
-    <Box
-        borderWidth="1px"
-        borderRadius="lg"
-        overflow="hidden"
-        p={4}
-        cursor="pointer"
-        onClick={() => onSelect(meditation)}
-    >
-        <Image
-            src={meditation.imageUrl}
-            alt={meditation.title}
-            mb={4}
-            objectFit="cover"
-            h="200px"
-            w="100%"
-        />
-        <Heading as="h3" size="md" mb={2}>
-            {meditation.title}
-        </Heading>
-        <Text>{meditation.description}</Text>
-    </Box>
-);
+const MeditationCard = ({ meditation, onSelect }) => {
+    const cardBg = useColorModeValue('white', 'gray.700');
+
+    return (
+        <Box
+            borderWidth="1px"
+            borderRadius="lg"
+            overflow="hidden"
+            p={4}
+            cursor="pointer"
+            onClick={() => onSelect(meditation)}
+            bg={cardBg}
+            transition="all 0.3s"
+            _hover={{ transform: 'scale(1.05)', shadow: 'lg' }}
+        >
+            <Image
+                src={meditation.imageUrl}
+                alt={meditation.title}
+                mb={4}
+                objectFit="cover"
+                h="200px"
+                w="100%"
+            />
+            <Heading as="h3" size="md" mb={2}>
+                {meditation.title}
+            </Heading>
+            <Text mb={2}>{meditation.description}</Text>
+            <Text fontWeight="bold">Duration: {meditation.duration}</Text>
+        </Box>
+    );
+};
 
 const MeditationPlayer = ({ meditation, onClose }) => {
     const [isPlaying, setIsPlaying] = useState(false);
@@ -89,14 +101,57 @@ const MeditationPlayer = ({ meditation, onClose }) => {
                 alt={meditation.title}
                 boxSize="300px"
                 objectFit="cover"
+                borderRadius="md"
             />
             <Text>{meditation.description}</Text>
+            <Text fontWeight="bold">Duration: {meditation.duration}</Text>
             <audio ref={audioRef} src={meditation.audioUrl} />
-            <Button onClick={() => setIsPlaying(!isPlaying)}>{isPlaying ? 'Pause' : 'Play'}</Button>
-            <Button onClick={onClose}>Close</Button>
+            <Button
+                onClick={() => setIsPlaying(!isPlaying)}
+                colorScheme="teal"
+                leftIcon={isPlaying ? <PauseIcon /> : <PlayIcon />}
+            >
+                {isPlaying ? 'Pause' : 'Play'}
+            </Button>
+            <Button onClick={onClose} variant="outline">
+                Close
+            </Button>
         </VStack>
     );
 };
+
+const PlayIcon = () => (
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+    >
+        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+    </svg>
+);
+
+const PauseIcon = () => (
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+    >
+        <rect x="6" y="4" width="4" height="16"></rect>
+        <rect x="14" y="4" width="4" height="16"></rect>
+    </svg>
+);
 
 export const GuidedMeditations = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -112,6 +167,10 @@ export const GuidedMeditations = () => {
             <Heading as="h1" size="2xl" mb={8}>
                 Guided Meditations
             </Heading>
+            <Text fontSize="lg" mb={6}>
+                Explore our collection of guided meditations to help reduce stress and improve your
+                well-being.
+            </Text>
             <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={8}>
                 {meditations.map((meditation) => (
                     <MeditationCard

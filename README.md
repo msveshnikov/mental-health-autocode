@@ -100,7 +100,3 @@ information.
 ## License
 
 This project is licensed under the MIT License.
-
-# TODO
-
--   put picture to main screen

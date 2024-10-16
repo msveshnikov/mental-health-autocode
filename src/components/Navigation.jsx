@@ -13,9 +13,10 @@ import {
     DrawerCloseButton,
     DrawerHeader,
     DrawerBody,
-    VStack
+    VStack,
+    useColorMode
 } from '@chakra-ui/react';
-import { HamburgerIcon } from '@chakra-ui/icons';
+import { HamburgerIcon, MoonIcon, SunIcon } from '@chakra-ui/icons';
 
 const NAV_ITEMS = [
     { label: 'Home', key: 'home' },
@@ -29,6 +30,7 @@ const NAV_ITEMS = [
 
 export const Navigation = ({ activeFeature, setActiveFeature }) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const { colorMode, toggleColorMode } = useColorMode();
     const isMobile = useBreakpointValue({ base: true, md: false });
 
     const handleNavItemClick = (key) => {
@@ -68,6 +70,12 @@ export const Navigation = ({ activeFeature, setActiveFeature }) => {
                         <NavItems />
                     </Stack>
                 </Flex>
+                <IconButton
+                    aria-label="Toggle color mode"
+                    icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+                    onClick={toggleColorMode}
+                    size="md"
+                />
             </Flex>
 
             <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
