@@ -9,7 +9,7 @@ resources, and tools for individuals, therapists, counselors, and healthcare pro
 
 # DEMO
 
-https://mental-health-autocode.onrender.com
+https://mental-health-autocode.onrender.com/landing.html
 
 ## Target Audience
 
@@ -101,7 +101,3 @@ information.
 
 This project is licensed under the MIT License.
 
-# TODO
-
--   make landing design awsome, nice, extremely catchy! super cool - add more information,
-    transitions, animations and pictures (hardcoded urls from unsplash)
