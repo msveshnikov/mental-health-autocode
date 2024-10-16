@@ -56,7 +56,13 @@ export const Navigation = ({ activeFeature, setActiveFeature }) => {
     );
 
     return (
-        <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
+        <Box
+            bg={useColorModeValue('gray.100', 'gray.900')}
+            px={4}
+            position="sticky"
+            top={0}
+            zIndex={10}
+        >
             <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
                 <IconButton
                     size={'md'}
@@ -65,11 +71,9 @@ export const Navigation = ({ activeFeature, setActiveFeature }) => {
                     display={{ md: 'none' }}
                     onClick={onOpen}
                 />
-                <Flex alignItems={'center'}>
-                    <Stack direction={'row'} spacing={4} display={{ base: 'none', md: 'flex' }}>
-                        <NavItems />
-                    </Stack>
-                </Flex>
+                <Stack direction={'row'} spacing={4} display={{ base: 'none', md: 'flex' }}>
+                    <NavItems />
+                </Stack>
                 <IconButton
                     aria-label="Toggle color mode"
                     icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}

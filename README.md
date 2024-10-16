@@ -101,3 +101,7 @@ information.
 
 This project is licensed under the MIT License.
 
+# TODO
+
+-   add local providers for psych, mental health issues, ie: depression, anxiety and addiction?
+    Local resources to call or websites via state, city, zip code.

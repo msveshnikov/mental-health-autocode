@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
     Box,
     Heading,
@@ -16,7 +16,12 @@ import {
     ModalBody,
     ModalCloseButton,
     useDisclosure,
-    SimpleGrid
+    SimpleGrid,
+    Input,
+    Select,
+    FormControl,
+    FormLabel,
+    useToast
 } from '@chakra-ui/react';
 
 const therapists = [
@@ -54,11 +59,54 @@ const TherapistCard = ({ therapist, onSelect }) => (
 export const OnlineTherapy = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [selectedTherapist, setSelectedTherapist] = useState(null);
+    const [sessionDate, setSessionDate] = useState('');
+    const [sessionTime, setSessionTime] = useState('');
+    const [localProviders, setLocalProviders] = useState([]);
+    const [zipCode, setZipCode] = useState('');
+    const toast = useToast();
 
     const handleSelectTherapist = (therapist) => {
         setSelectedTherapist(therapist);
         onOpen();
     };
+
+    const handleBookSession = () => {
+        if (!sessionDate || !sessionTime) {
+            toast({
+                title: 'Error',
+                description: 'Please select both date and time for the session.',
+                status: 'error',
+                duration: 3000,
+                isClosable: true
+            });
+            return;
+        }
+        toast({
+            title: 'Session Booked',
+            description: `Your session with ${selectedTherapist.name} is scheduled for ${sessionDate} at ${sessionTime}.`,
+            status: 'success',
+            duration: 5000,
+            isClosable: true
+        });
+        onClose();
+    };
+
+    useEffect(() => {
+        const fetchLocalProviders = async () => {
+            if (zipCode.length === 5) {
+                // Simulating API call to fetch local providers
+                const mockProviders = [
+                    { name: 'Local Clinic A', type: 'Depression' },
+                    { name: 'Anxiety Support Center', type: 'Anxiety' },
+                    { name: 'Addiction Recovery Group', type: 'Addiction' }
+                ];
+                setLocalProviders(mockProviders);
+            } else {
+                setLocalProviders([]);
+            }
+        };
+        fetchLocalProviders();
+    }, [zipCode]);
 
     return (
         <Box>
@@ -67,7 +115,7 @@ export const OnlineTherapy = () => {
                 Connect with licensed therapists for confidential online sessions. Choose a
                 therapist that specializes in your area of concern.
             </Text>
-            <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6}>
+            <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6} mb={8}>
                 {therapists.map((therapist) => (
                     <TherapistCard
                         key={therapist.id}
@@ -77,6 +125,29 @@ export const OnlineTherapy = () => {
                 ))}
             </SimpleGrid>
 
+            <Heading size="md" mb={4}>
+                Find Local Mental Health Resources
+            </Heading>
+            <FormControl mb={4}>
+                <FormLabel>Enter ZIP Code</FormLabel>
+                <Input
+                    value={zipCode}
+                    onChange={(e) => setZipCode(e.target.value)}
+                    placeholder="Enter ZIP Code"
+                    maxLength={5}
+                />
+            </FormControl>
+            {localProviders.length > 0 && (
+                <VStack align="start" spacing={2} mb={8}>
+                    <Heading size="sm">Local Providers:</Heading>
+                    {localProviders.map((provider, index) => (
+                        <Text key={index}>
+                            {provider.name} - Specializes in {provider.type}
+                        </Text>
+                    ))}
+                </VStack>
+            )}
+
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent>
@@ -84,17 +155,39 @@ export const OnlineTherapy = () => {
                     <ModalCloseButton />
                     <ModalBody>
                         {selectedTherapist && (
-                            <VStack align="start" spacing={3}>
+                            <VStack align="start" spacing={4}>
                                 <Text>
                                     You are about to book a session with {selectedTherapist.name},
                                     specializing in {selectedTherapist.specialty}.
                                 </Text>
-                                <Text>Please select a date and time for your session.</Text>
+                                <FormControl>
+                                    <FormLabel>Select Date</FormLabel>
+                                    <Input
+                                        type="date"
+                                        value={sessionDate}
+                                        onChange={(e) => setSessionDate(e.target.value)}
+                                    />
+                                </FormControl>
+                                <FormControl>
+                                    <FormLabel>Select Time</FormLabel>
+                                    <Select
+                                        placeholder="Select time"
+                                        value={sessionTime}
+                                        onChange={(e) => setSessionTime(e.target.value)}
+                                    >
+                                        <option value="09:00">09:00 AM</option>
+                                        <option value="10:00">10:00 AM</option>
+                                        <option value="11:00">11:00 AM</option>
+                                        <option value="14:00">02:00 PM</option>
+                                        <option value="15:00">03:00 PM</option>
+                                        <option value="16:00">04:00 PM</option>
+                                    </Select>
+                                </FormControl>
                             </VStack>
                         )}
                     </ModalBody>
                     <ModalFooter>
-                        <Button colorScheme="blue" mr={3}>
+                        <Button colorScheme="blue" mr={3} onClick={handleBookSession}>
                             Confirm Booking
                         </Button>
                         <Button variant="ghost" onClick={onClose}>
