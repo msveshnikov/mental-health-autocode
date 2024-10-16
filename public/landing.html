@@ -89,10 +89,10 @@
                 display: flex;
                 flex-wrap: wrap;
                 justify-content: space-between;
-                margin: 50px 0;
+                /* margin: 50px 0; */
             }
             .feature {
-                flex-basis: calc(33.333% - 20px);
+                flex-basis: calc(48.333% - 20px);
                 background-color: white;
                 border-radius: 8px;
                 padding: 20px;
@@ -207,6 +207,7 @@
             }
             .faq {
                 padding: 50px 0;
+                margin: 20px;
             }
             .faq-item {
                 margin-bottom: 20px;
@@ -233,22 +234,7 @@
                 object-fit: cover;
                 border-radius: 8px 8px 0 0;
             }
-            .scroll-indicator {
-                position: fixed;
-                bottom: 20px;
-                left: 50%;
-                transform: translateX(-50%);
-                width: 40px;
-                height: 40px;
-                background-color: var(--accent-color);
-                border-radius: 50%;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                cursor: pointer;
-                z-index: 1000;
-                animation: bounce 2s infinite;
-            }
+
             @keyframes bounce {
                 0%,
                 20%,
@@ -264,20 +250,11 @@
                     transform: translateY(-5px);
                 }
             }
-            .scroll-indicator::after {
-                content: '↓';
-                color: white;
-                font-size: 24px;
-            }
         </style>
     </head>
     <body>
         <button id="dark-mode-toggle">🌓</button>
-        <div class="accessibility-menu">
-            <button id="increase-font">A+</button>
-            <button id="decrease-font">A-</button>
-            <button id="high-contrast">High Contrast</button>
-        </div>
+
         <header>
             <div class="container">
                 <nav>
@@ -411,8 +388,8 @@
 
         <footer id="contact">
             <div class="container">
-                <p>&copy; 2023 Mental Health & Wellness Platform. All rights reserved.</p>
-                <p>Contact us: support@mentalhealth.com</p>
+                <p>&copy; 2024 MaxSoft. All rights reserved.</p>
+                <p>Contact us: support@autocode.work</p>
             </div>
         </footer>
 
@@ -420,8 +397,6 @@
             <source src="/music4.mp3" type="audio/mpeg" />
             Your browser does not support the audio element.
         </audio>
-
-        <div class="scroll-indicator"></div>
 
         <script>
             document.getElementById('dark-mode-toggle').addEventListener('click', function () {
@@ -437,21 +412,6 @@
                 });
             });
 
-            let fontSize = 16;
-            document.getElementById('increase-font').addEventListener('click', function () {
-                fontSize += 2;
-                document.body.style.fontSize = fontSize + 'px';
-            });
-
-            document.getElementById('decrease-font').addEventListener('click', function () {
-                fontSize = Math.max(12, fontSize - 2);
-                document.body.style.fontSize = fontSize + 'px';
-            });
-
-            document.getElementById('high-contrast').addEventListener('click', function () {
-                document.body.classList.toggle('high-contrast');
-            });
-
             document.querySelectorAll('.faq-question').forEach((question) => {
                 question.addEventListener('click', function () {
                     const answer = this.nextElementSibling;
@@ -463,22 +423,6 @@
                 const musicPlayer = document.getElementById('music-player');
                 musicPlayer.volume = 0.3;
                 musicPlayer.play();
-            });
-
-            const scrollIndicator = document.querySelector('.scroll-indicator');
-            scrollIndicator.addEventListener('click', () => {
-                window.scrollTo({
-                    top: window.innerHeight,
-                    behavior: 'smooth'
-                });
-            });
-
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > window.innerHeight / 2) {
-                    scrollIndicator.style.display = 'none';
-                } else {
-                    scrollIndicator.style.display = 'flex';
-                }
             });
         </script>
     </body>

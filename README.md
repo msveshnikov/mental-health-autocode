@@ -99,10 +99,6 @@ information.
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the MIT License (c) MaxSoft,2024
 
 # TODO
-
--   add local providers for psych, mental health issues, ie: depression, anxiety and addiction?
-    Local resources to call or websites via state, city, zip code.
--   filter only mental health doctors, add phone number
