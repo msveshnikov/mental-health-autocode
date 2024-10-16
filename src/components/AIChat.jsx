@@ -42,7 +42,7 @@ const AIChat = () => {
             Authorization: `Bearer ${token}`
         };
 
-        setChatHistory([...chatHistory, { user: input, assistant: null }]);
+        setChatHistory([...chatHistory, { role: 'user', content: input }]);
         setInput('');
         setIsModelResponding(true);
 
@@ -55,7 +55,7 @@ const AIChat = () => {
                     lang: (navigator.languages && navigator.languages[0]) || navigator.language,
                     model: selectedModel,
                     customGPT: 'Mental Health Assistance',
-                    chatHistory: chatHistory.map((h) => ({ user: h.user, assistant: h.assistant }))
+                    chatHistory: chatHistory.map((h) => ({ role: h.role, content: h.content }))
                 })
             });
 
@@ -65,8 +65,8 @@ const AIChat = () => {
 
             const data = await response.json();
             setChatHistory((prev) => [
-                ...prev.slice(0, -1),
-                { user: input, assistant: data.response }
+                ...prev,
+                { role: 'assistant', content: data.response }
             ]);
         } catch (error) {
             toast({
@@ -77,8 +77,8 @@ const AIChat = () => {
                 isClosable: true
             });
             setChatHistory((prev) => [
-                ...prev.slice(0, -1),
-                { user: input, assistant: 'Sorry, I encountered an error. Please try again.' }
+                ...prev,
+                { role: 'assistant', content: 'Sorry, I encountered an error. Please try again.' }
             ]);
         } finally {
             setIsModelResponding(false);
@@ -96,22 +96,22 @@ const AIChat = () => {
                         <Flex
                             key={index}
                             mb={4}
-                            flexDirection={message.user ? 'row' : 'row-reverse'}
+                            flexDirection={message.role === 'user' ? 'row' : 'row-reverse'}
                         >
                             <Avatar
                                 size="sm"
-                                name={message.user ? 'User' : 'AI'}
-                                src={message.user ? null : '/ai-avatar.png'}
-                                mr={message.user ? 2 : 0}
-                                ml={message.user ? 0 : 2}
+                                name={message.role === 'user' ? 'User' : 'AI'}
+                                src={message.role === 'user' ? null : '/ai-avatar.png'}
+                                mr={message.role === 'user' ? 2 : 0}
+                                ml={message.role === 'user' ? 0 : 2}
                             />
                             <Box
-                                bg={message.user ? 'blue.100' : 'green.100'}
+                                bg={message.role === 'user' ? 'blue.100' : 'green.100'}
                                 p={2}
                                 borderRadius="md"
                                 maxWidth="70%"
                             >
-                                <Text>{message.user || message.assistant}</Text>
+                                <Text>{message.content}</Text>
                             </Box>
                         </Flex>
                     ))}
