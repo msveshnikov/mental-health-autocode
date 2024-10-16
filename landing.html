@@ -19,7 +19,7 @@
             padding: 0;
             background-color: var(--background-color);
             color: var(--text-color);
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
         }
         .container {
             max-width: 1200px;
@@ -169,16 +169,68 @@
             background-color: #34495e;
             color: #ecf0f1;
         }
+        .accessibility-menu {
+            position: fixed;
+            left: 20px;
+            bottom: 20px;
+            z-index: 1001;
+        }
+        .accessibility-menu button {
+            background: var(--accent-color);
+            border: none;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: background-color 0.3s ease;
+        }
+        .accessibility-menu button:hover {
+            background-color: #e69019;
+        }
+        .testimonials {
+            background-color: var(--secondary-color);
+            padding: 50px 0;
+            text-align: center;
+        }
+        .testimonial {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            font-style: italic;
+        }
+        .faq {
+            padding: 50px 0;
+        }
+        .faq-item {
+            margin-bottom: 20px;
+        }
+        .faq-question {
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .faq-answer {
+            display: none;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
     <button id="dark-mode-toggle">🌓</button>
+    <div class="accessibility-menu">
+        <button id="increase-font">A+</button>
+        <button id="decrease-font">A-</button>
+        <button id="high-contrast">High Contrast</button>
+    </div>
     <header>
         <div class="container">
             <nav>
                 <ul>
                     <li><a href="#features">Features</a></li>
                     <li><a href="#about">About</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#faq">FAQ</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
@@ -228,6 +280,32 @@
         </div>
     </section>
 
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <h2>What Our Users Say</h2>
+            <div class="testimonial">
+                <p>"This platform has been a game-changer for my mental health journey. The guided meditations and mood tracking features have helped me gain better control over my emotions."</p>
+                <p>- Sarah K.</p>
+            </div>
+            <div class="testimonial">
+                <p>"As a therapist, I've found the online therapy tools to be incredibly useful for connecting with my clients. The platform is intuitive and secure."</p>
+                <p>- Dr. Michael R.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="faq container">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-item">
+            <div class="faq-question">How secure is my data on this platform?</div>
+            <div class="faq-answer">We take data security very seriously. All data is encrypted and we comply with HIPAA regulations to ensure your information remains confidential.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">Can I use this platform alongside my existing therapy?</div>
+            <div class="faq-answer">Absolutely! Our platform is designed to complement traditional therapy and provide additional support between sessions.</div>
+        </div>
+    </section>
+
     <footer id="contact">
         <div class="container">
             <p>&copy; 2023 Mental Health & Wellness Platform. All rights reserved.</p>
@@ -246,6 +324,28 @@
                 document.querySelector(this.getAttribute('href')).scrollIntoView({
                     behavior: 'smooth'
                 });
+            });
+        });
+
+        let fontSize = 16;
+        document.getElementById('increase-font').addEventListener('click', function() {
+            fontSize += 2;
+            document.body.style.fontSize = fontSize + 'px';
+        });
+
+        document.getElementById('decrease-font').addEventListener('click', function() {
+            fontSize = Math.max(12, fontSize - 2);
+            document.body.style.fontSize = fontSize + 'px';
+        });
+
+        document.getElementById('high-contrast').addEventListener('click', function() {
+            document.body.classList.toggle('high-contrast');
+        });
+
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', function() {
+                const answer = this.nextElementSibling;
+                answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
             });
         });
     </script>
