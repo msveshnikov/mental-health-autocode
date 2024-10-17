@@ -1,5 +1,5 @@
 import { Box, Container, Stack, Text, Link, IconButton } from '@chakra-ui/react';
-import { FaTwitter, FaFacebook, FaInstagram, FaLinkedin } from 'react-icons/fa';
+import { FaTwitter, FaLinkedin } from 'react-icons/fa';
 
 export const Footer = () => {
     return (
@@ -27,6 +27,8 @@ export const Footer = () => {
                     </Stack>
                     <Stack direction="row" spacing="4">
                         <IconButton
+                            as="a"
+                            href="https://x.com/MangaTVShop"
                             aria-label="Twitter"
                             icon={<FaTwitter />}
                             size="md"
@@ -34,20 +36,8 @@ export const Footer = () => {
                             variant="ghost"
                         />
                         <IconButton
-                            aria-label="Facebook"
-                            icon={<FaFacebook />}
-                            size="md"
-                            color="gray.400"
-                            variant="ghost"
-                        />
-                        <IconButton
-                            aria-label="Instagram"
-                            icon={<FaInstagram />}
-                            size="md"
-                            color="gray.400"
-                            variant="ghost"
-                        />
-                        <IconButton
+                            as="a"
+                            href="https://www.linkedin.com/in/max-sveshnikov-852248b4/"
                             aria-label="LinkedIn"
                             icon={<FaLinkedin />}
                             size="md"

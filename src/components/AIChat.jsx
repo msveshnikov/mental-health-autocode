@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {
     Box,
     VStack,
@@ -9,7 +9,7 @@ import {
     useToast,
     Flex,
     Avatar,
-    Select
+    useColorModeValue
 } from '@chakra-ui/react';
 
 const API_URL = 'https://allchat.online/api';
@@ -18,8 +18,12 @@ const AIChat = () => {
     const [input, setInput] = useState('');
     const [chatHistory, setChatHistory] = useState([]);
     const [isModelResponding, setIsModelResponding] = useState(false);
-    const [selectedModel, setSelectedModel] = useState('gpt-3.5-turbo');
     const toast = useToast();
+    const chatBoxRef = useRef(null);
+
+    const bgColor = useColorModeValue('gray.50', 'gray.700');
+    const userBgColor = useColorModeValue('blue.100', 'blue.700');
+    const aiBgColor = useColorModeValue('green.100', 'green.700');
 
     useEffect(() => {
         const storedChatHistory = localStorage.getItem('chatHistory');
@@ -30,6 +34,9 @@ const AIChat = () => {
 
     useEffect(() => {
         localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
+        if (chatBoxRef.current) {
+            chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
+        }
     }, [chatHistory]);
 
     const handleSubmit = async (e) => {
@@ -53,7 +60,7 @@ const AIChat = () => {
                 body: JSON.stringify({
                     input,
                     lang: (navigator.languages && navigator.languages[0]) || navigator.language,
-                    model: selectedModel,
+                    model: "gpt-3.5-turbo",
                     customGPT: 'Mental Health Assistance',
                     chatHistory: chatHistory.map((h) => ({ role: h.role, content: h.content }))
                 })
@@ -64,10 +71,7 @@ const AIChat = () => {
             }
 
             const data = await response.json();
-            setChatHistory((prev) => [
-                ...prev,
-                { role: 'assistant', content: data.textResponse }
-            ]);
+            setChatHistory((prev) => [...prev, { role: 'assistant', content: data.textResponse }]);
         } catch (error) {
             toast({
                 title: 'Error',
@@ -88,10 +92,15 @@ const AIChat = () => {
     return (
         <Box maxWidth="800px" margin="auto" p={4}>
             <VStack spacing={4} align="stretch">
-                <Select value={selectedModel} onChange={(e) => setSelectedModel(e.target.value)}>
-                    <option value="gpt-3.5-turbo">GPT-3.5 Turbo</option>
-                </Select>
-                <Box height="400px" overflowY="auto" borderWidth={1} borderRadius="md" p={4}>
+                <Box
+                    height="500px"
+                    overflowY="auto"
+                    borderWidth={1}
+                    borderRadius="md"
+                    p={4}
+                    bg={bgColor}
+                    ref={chatBoxRef}
+                >
                     {chatHistory.map((message, index) => (
                         <Flex
                             key={index}
@@ -106,7 +115,7 @@ const AIChat = () => {
                                 ml={message.role === 'user' ? 0 : 2}
                             />
                             <Box
-                                bg={message.role === 'user' ? 'blue.100' : 'green.100'}
+                                bg={message.role === 'user' ? userBgColor : aiBgColor}
                                 p={2}
                                 borderRadius="md"
                                 maxWidth="70%"
