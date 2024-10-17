@@ -60,7 +60,7 @@ const AIChat = () => {
                 body: JSON.stringify({
                     input,
                     lang: (navigator.languages && navigator.languages[0]) || navigator.language,
-                    model: "gpt-3.5-turbo",
+                    model: 'gpt-3.5-turbo',
                     customGPT: 'Mental Health Assistance',
                     chatHistory: chatHistory.map((h) => ({ role: h.role, content: h.content }))
                 })

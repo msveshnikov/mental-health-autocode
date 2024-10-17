@@ -1,5 +1,14 @@
 import { useState } from 'react';
-import { ChakraProvider, Box, VStack, Heading, Text, Button, Image } from '@chakra-ui/react';
+import {
+    ChakraProvider,
+    Box,
+    VStack,
+    Heading,
+    Text,
+    Button,
+    Image,
+    useColorMode
+} from '@chakra-ui/react';
 import { GuidedMeditations } from './components/GuidedMeditations';
 import { MindfulnessExercises } from './components/MindfulnessExercises';
 import { MoodTracker } from './components/MoodTracker';
@@ -9,10 +18,13 @@ import CommunityForums from './components/CommunityForums';
 import { Navigation } from './components/Navigation';
 import { Footer } from './components/Footer';
 import AIChat from './components/AIChat';
+import Privacy from './components/Privacy';
+import Terms from './components/Terms';
 import theme from './theme';
 
 function App() {
     const [activeFeature, setActiveFeature] = useState('home');
+    const { colorMode, toggleColorMode } = useColorMode();
 
     const renderFeature = () => {
         switch (activeFeature) {
@@ -30,6 +42,10 @@ function App() {
                 return <CommunityForums />;
             case 'aiChat':
                 return <AIChat />;
+            case 'privacy':
+                return <Privacy />;
+            case 'terms':
+                return <Terms />;
             default:
                 return (
                     <VStack spacing={8} align="center">
@@ -63,11 +79,16 @@ function App() {
     return (
         <ChakraProvider theme={theme}>
             <Box minHeight="100vh" display="flex" flexDirection="column">
-                <Navigation activeFeature={activeFeature} setActiveFeature={setActiveFeature} />
+                <Navigation
+                    activeFeature={activeFeature}
+                    setActiveFeature={setActiveFeature}
+                    colorMode={colorMode}
+                    toggleColorMode={toggleColorMode}
+                />
                 <Box flex={1} p={8}>
                     {renderFeature()}
                 </Box>
-                <Footer />
+                <Footer setActiveFeature={setActiveFeature} />
             </Box>
         </ChakraProvider>
     );
