@@ -102,5 +102,3 @@ information.
 This project is licensed under the MIT License (c) MaxSoft,2024
 
 # TODO
-
-- move privacy, terms to main.jsx with react router

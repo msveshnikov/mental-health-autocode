@@ -1,14 +1,5 @@
 import { useState } from 'react';
-import {
-    ChakraProvider,
-    Box,
-    VStack,
-    Heading,
-    Text,
-    Button,
-    Image,
-    useColorMode
-} from '@chakra-ui/react';
+import { Box, VStack, Heading, Text, Button, Image } from '@chakra-ui/react';
 import { GuidedMeditations } from './components/GuidedMeditations';
 import { MindfulnessExercises } from './components/MindfulnessExercises';
 import { MoodTracker } from './components/MoodTracker';
@@ -20,11 +11,9 @@ import { Footer } from './components/Footer';
 import AIChat from './components/AIChat';
 import Privacy from './components/Privacy';
 import Terms from './components/Terms';
-import theme from './theme';
 
 function App() {
     const [activeFeature, setActiveFeature] = useState('home');
-    const { colorMode, toggleColorMode } = useColorMode();
 
     const renderFeature = () => {
         switch (activeFeature) {
@@ -77,20 +66,13 @@ function App() {
     };
 
     return (
-        <ChakraProvider theme={theme}>
-            <Box minHeight="100vh" display="flex" flexDirection="column">
-                <Navigation
-                    activeFeature={activeFeature}
-                    setActiveFeature={setActiveFeature}
-                    colorMode={colorMode}
-                    toggleColorMode={toggleColorMode}
-                />
-                <Box flex={1} p={8}>
-                    {renderFeature()}
-                </Box>
-                <Footer setActiveFeature={setActiveFeature} />
+        <Box minHeight="100vh" display="flex" flexDirection="column">
+            <Navigation activeFeature={activeFeature} setActiveFeature={setActiveFeature} />
+            <Box flex={1} p={8}>
+                {renderFeature()}
             </Box>
-        </ChakraProvider>
+            <Footer setActiveFeature={setActiveFeature} />
+        </Box>
     );
 }
 
